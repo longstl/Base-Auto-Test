@@ -1,0 +1,5 @@
+environment: dev
+url:
+  url: dev.taconnect.vn
+  protocol: http://
+  cloak:

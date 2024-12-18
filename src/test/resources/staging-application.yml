@@ -1,0 +1,5 @@
+environment: staging
+url:
+  url: staging.taconnect.vn
+  protocol: http://
+  cloak:

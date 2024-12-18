@@ -1,0 +1,58 @@
+plugins {
+    id 'java'
+    id 'io.qameta.allure' version '2.9.3'
+}
+
+group 'com.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    allureVersion = '2.24.0'
+    selenideTesNgVersion = '6.19.0'
+    jdiLightHtmlVersion = '1.5.0'
+    webDriverManagerVersion = '5.3.3'
+    hamcrestVersion = '2.2'
+    slf4jSimpleVersion = '2.0.9'
+    testngVersion = '7.8.0'
+    orgJsonVersion = '20231013'
+    snakeyamlVersion = '2.2'
+    lombokVersion = '1.18.30'
+}
+
+sourceCompatibility = '11'
+targetCompatibility = '11'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+dependencies {
+    testImplementation("com.codeborne:selenide-testng:${selenideTesNgVersion}")
+    testImplementation("io.qameta.allure:allure-selenide:${allureVersion}")
+    testImplementation("com.epam.jdi:jdi-light-html:${jdiLightHtmlVersion}")
+    testImplementation("io.github.bonigarcia:webdrivermanager:${webDriverManagerVersion}")
+    testImplementation("org.hamcrest:hamcrest:${hamcrestVersion}")
+    testImplementation("org.slf4j:slf4j-simple:${slf4jSimpleVersion}")
+    testImplementation("org.json:json:${orgJsonVersion}")
+
+    testImplementation("org.testng:testng:${testngVersion}")
+    testImplementation("org.yaml:snakeyaml:${snakeyamlVersion}")
+    testCompileOnly("org.projectlombok:lombok:${lombokVersion}")
+    testAnnotationProcessor("org.projectlombok:lombok:${lombokVersion}")
+}
+
+test {
+    useTestNG()
+}
+allure {
+    autoconfigure = true
+    version = "${allureVersion}"
+
+    useTestNG {
+        version = "${allureVersion}"
+    }
+}
